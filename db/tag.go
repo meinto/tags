@@ -9,12 +9,14 @@ import (
 
 type Tag struct {
 	gorm.Model
-	Tag string
+	Index string
+	Tag   string
 }
 
-func (db *DB) CreateTag(str string) Tag {
+func (db *DB) CreateTag(str string, index string) Tag {
 	db.instance.Create(&Tag{
-		Tag: str,
+		Index: index,
+		Tag:   str,
 	})
 	var tag Tag
 	db.instance.Last(&tag, "tag = ?", str)

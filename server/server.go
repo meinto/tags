@@ -22,8 +22,8 @@ func Create(db *db.DB) *Server {
 
 	router.GET("/", rs.Index)
 
+	router.POST("/create/:index", rs.CreateTag)
 	router.POST("/count", rs.CountTags)
-	router.POST("/create", rs.CreateTag)
 
 	port := 8080
 	return &Server{port, router}

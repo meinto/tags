@@ -8,7 +8,9 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-func (rs *Routes) CreateTag(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func (rs *Routes) CreateTag(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	index := ps.ByName("index")
+
 	body := r.Body
 	defer body.Close()
 
@@ -18,7 +20,7 @@ func (rs *Routes) CreateTag(w http.ResponseWriter, r *http.Request, _ httprouter
 		w.Write([]byte("error occured while reading body :("))
 		return
 	}
-	tag := rs.db.CreateTag(string(bodyBytes))
+	tag := rs.db.CreateTag(string(bodyBytes), index)
 
 	enc := json.NewEncoder(w)
 	enc.Encode(tag)
