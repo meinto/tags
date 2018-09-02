@@ -2,7 +2,6 @@ package db
 
 import (
 	"log"
-	"os"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
@@ -13,8 +12,6 @@ type DB struct {
 }
 
 func New() *DB {
-	f, _ := os.OpenFile("tags.db", os.O_RDONLY|os.O_CREATE, 0775)
-	defer f.Close()
 	instance, err := gorm.Open("sqlite3", "tags.db")
 	if err != nil {
 		log.Panicln(err)
