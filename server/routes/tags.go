@@ -2,7 +2,6 @@ package routes
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 
@@ -15,7 +14,7 @@ func (rs *Routes) CreateTag(w http.ResponseWriter, r *http.Request, _ httprouter
 
 	bodyBytes, err := ioutil.ReadAll(body)
 	if err != nil {
-		w.Header().Add("Status", fmt.Sprintf("%d", http.StatusInternalServerError))
+		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte("error occured while reading body :("))
 		return
 	}
@@ -31,7 +30,7 @@ func (rs *Routes) CountTags(w http.ResponseWriter, r *http.Request, _ httprouter
 
 	var jsn map[string]interface{}
 	if err := json.NewDecoder(body).Decode(&jsn); err != nil {
-		w.Header().Add("Status", fmt.Sprintf("%d", http.StatusInternalServerError))
+		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte("error occured while decoding body :("))
 		return
 	}
