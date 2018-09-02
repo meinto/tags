@@ -1,0 +1,20 @@
+version: '3'
+services:
+  tags:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    volumes:
+      - ./tags.db:/app/tags.db:rw
+    networks:
+      - web
+    container_name: tags
+
+networks:
+  web:
+    external: true
