@@ -2,6 +2,7 @@ package db
 
 import (
 	"encoding/json"
+	"log"
 	"strings"
 
 	"github.com/jinzhu/gorm"
@@ -9,25 +10,26 @@ import (
 
 type Tag struct {
 	gorm.Model
-	Index string
-	Tag   string
+	Tagindex string
+	Tag      string
 }
 
 func (db *DB) CreateTag(str string, index string) Tag {
 	db.instance.Create(&Tag{
-		Index: index,
-		Tag:   str,
+		Tagindex: index,
+		Tag:      str,
 	})
 	var tag Tag
 	db.instance.Last(&tag, "tag = ?", str)
 	return tag
 }
 
-func (db *DB) CountTags(needle map[string]interface{}) int {
-	rows, err := db.instance.Table("tags").Select("*").Rows()
+func (db *DB) CountTags(needle map[string]interface{}, index string) int {
+	rows, err := db.instance.Table("tags").Select("*").Where("tagindex = ?", index).Rows()
 	defer rows.Close()
 	if err != nil {
-		return -1
+		log.Println(err)
+		return 0
 	}
 
 	count := 0

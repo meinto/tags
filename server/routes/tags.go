@@ -26,7 +26,9 @@ func (rs *Routes) CreateTag(w http.ResponseWriter, r *http.Request, ps httproute
 	enc.Encode(tag)
 }
 
-func (rs *Routes) CountTags(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+func (rs *Routes) CountTags(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	index := ps.ByName("index")
+
 	body := r.Body
 	defer body.Close()
 
@@ -36,7 +38,7 @@ func (rs *Routes) CountTags(w http.ResponseWriter, r *http.Request, _ httprouter
 		w.Write([]byte("error occured while decoding body :("))
 		return
 	}
-	nmbr := rs.db.CountTags(jsn)
+	nmbr := rs.db.CountTags(jsn, index)
 
 	enc := json.NewEncoder(w)
 	enc.Encode(map[string]int{"count": nmbr})
