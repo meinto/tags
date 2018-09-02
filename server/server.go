@@ -20,8 +20,8 @@ func Create(db *db.DB) *Server {
 
 	router := httprouter.New()
 
-	routes.POST("/count", rs.CountTags)
-	routes.POST("/create", rs.CreateTag)
+	router.POST("/count", rs.CountTags)
+	router.POST("/create", rs.CreateTag)
 
 	port := 8080
 	return &Server{port, router}
