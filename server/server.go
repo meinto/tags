@@ -20,6 +20,8 @@ func Create(db *db.DB) *Server {
 
 	router := httprouter.New()
 
+	routes.GET("/", rs.Index)
+
 	router.POST("/count", rs.CountTags)
 	router.POST("/create", rs.CreateTag)
 
