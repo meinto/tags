@@ -1,8 +1,12 @@
 package main
 
-import "tags/server"
+import (
+	"tags/db"
+	"tags/server"
+)
 
 func main() {
-	s := server.Create()
+	db := db.New()
+	s := server.Create(db)
 	s.Start()
 }
