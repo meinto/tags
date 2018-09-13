@@ -15,17 +15,17 @@ type Tag struct {
 }
 
 func (db *DB) CreateTag(str string, index string) Tag {
-	db.instance.Create(&Tag{
+	db.Instance.Create(&Tag{
 		Tagindex: index,
 		Tag:      str,
 	})
 	var tag Tag
-	db.instance.Last(&tag, "tag = ?", str)
+	db.Instance.Last(&tag, "tag = ?", str)
 	return tag
 }
 
 func (db *DB) CountTags(needle map[string]interface{}, index string) int {
-	rows, err := db.instance.Table("tags").Select("*").Where("tagindex = ?", index).Rows()
+	rows, err := db.Instance.Table("tags").Select("*").Where("tagindex = ?", index).Rows()
 	defer rows.Close()
 	if err != nil {
 		log.Println(err)
@@ -36,7 +36,7 @@ func (db *DB) CountTags(needle map[string]interface{}, index string) int {
 	for rows.Next() {
 		found := true
 		var tag Tag
-		db.instance.ScanRows(rows, &tag)
+		db.Instance.ScanRows(rows, &tag)
 
 		var haystack map[string]interface{}
 		json.NewDecoder(strings.NewReader(tag.Tag)).Decode(&haystack)

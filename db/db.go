@@ -8,7 +8,7 @@ import (
 )
 
 type DB struct {
-	instance *gorm.DB
+	Instance *gorm.DB
 }
 
 func New() *DB {
