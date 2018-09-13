@@ -2,9 +2,9 @@ package routes
 
 import (
 	"net/http"
-	"tags/db"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/meinto/tags/db"
 )
 
 type Routes struct {

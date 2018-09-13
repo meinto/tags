@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"tags/db"
-	"tags/server/routes"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/meinto/tags/db"
+	"github.com/meinto/tags/server/routes"
 )
 
 type Server struct {

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"tags/db"
-	"tags/server"
+	"github.com/meinto/tags/db"
+	"github.com/meinto/tags/server"
 )
 
 func main() {
