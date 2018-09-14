@@ -3,7 +3,7 @@ stages:
   - test
   - build
   - push
-  - run
+  # - run
   - cleanup
 
 variables:
@@ -47,13 +47,13 @@ push:
   only:
     - master
 
-run:
-  stage: run
-  image: docker
-  tags:
-    - docker
-  script:
-    - docker run $DOCKER_USERNAME/tags:$CI_PIPELINE_IID -d
+# run:
+#   stage: run
+#   image: docker
+#   tags:
+#     - docker
+#   script:
+#     - docker run $DOCKER_USERNAME/tags:$CI_PIPELINE_IID -d
 
 cleanup:
   stage: cleanup
