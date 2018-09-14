@@ -27,4 +27,6 @@ build:
   image: docker
   script:
     - docker build -t tags:$CI_PIPELINE_IID
+  only: 
+    - master
 
