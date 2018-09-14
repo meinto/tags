@@ -6,7 +6,7 @@ before_script:
   - mkdir -p $GOPATH/src/github.com/meinto /builds/meinto/tags
   - cp -r $CI_PROJECT_DIR $GOPATH/src/github.com/meinto
   - ln -s $GOPATH/src/github.com/meinto /builds/meinto/tags
-  - cd $GOPATH/src/github.com/meinto
+  - cd $GOPATH/src/github.com/meinto/tags
 
 test:
   stage: test
@@ -14,5 +14,5 @@ test:
     - docker
   image: golang:1.11
   script: 
-    - ls && pwd
+    - go get ./...
     - go test ./...
