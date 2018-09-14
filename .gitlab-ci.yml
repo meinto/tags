@@ -1,6 +1,7 @@
 
 stages:
   - test
+  - build
 
 before_script:
   - mkdir -p $GOPATH/src/github.com/meinto /builds/meinto/tags
@@ -18,3 +19,12 @@ test:
     - go test ./...
   only: 
     - master
+
+build:
+  stage: build
+  tags:
+    - docker
+  image: docker
+  script:
+    - docker build -t tags:$CI_PIPELINE_IID
+
