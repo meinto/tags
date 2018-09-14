@@ -1,6 +1,6 @@
 # tags - a go app to handle tags generically
 
-[![pipeline](https://gitlab.com/meinto/tags/badges/master/pipeline.svg)](https://gitlab.com/meinto/tags)
+[![pipeline](https://gitlab.com/meinto/tags/badges/master/pipeline.svg)](https://gitlab.com/meinto/tags/pipelines)
 
 This go app provides a simple api to save "tags" in json format. Use it for example to count pageviews of your website.
 
