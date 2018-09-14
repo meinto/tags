@@ -10,9 +10,11 @@ before_script:
 
 test:
   stage: test
-  tags:
+  tags: 
     - docker
   image: golang:1.11
   script: 
     - go get ./...
     - go test ./...
+  only: 
+    - master
