@@ -33,6 +33,7 @@ build:
 
 push:
   stage: push
+  image: docker
   tags:
     - docker
   script:
