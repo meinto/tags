@@ -6,7 +6,7 @@ stages:
   - cleanup
 
 variables:
-  - DOCKER_USERNAME: meinto
+  DOCKER_USERNAME: meinto
 
 before_script:
   - mkdir -p $GOPATH/src/github.com/$DOCKER_USERNAME /builds/$DOCKER_USERNAME/tags
