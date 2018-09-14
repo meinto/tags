@@ -5,11 +5,14 @@ stages:
   - push
   - cleanup
 
+variables:
+  - DOCKER_USERNAME: meinto
+
 before_script:
-  - mkdir -p $GOPATH/src/github.com/meinto /builds/meinto/tags
-  - cp -r $CI_PROJECT_DIR $GOPATH/src/github.com/meinto
-  - ln -s $GOPATH/src/github.com/meinto /builds/meinto/tags
-  - cd $GOPATH/src/github.com/meinto/tags
+  - mkdir -p $GOPATH/src/github.com/$DOCKER_USERNAME /builds/$DOCKER_USERNAME/tags
+  - cp -r $CI_PROJECT_DIR $GOPATH/src/github.com/$DOCKER_USERNAME
+  - ln -s $GOPATH/src/github.com/$DOCKER_USERNAME /builds/$DOCKER_USERNAME/tags
+  - cd $GOPATH/src/github.com/$DOCKER_USERNAME/tags
 
 test:
   stage: test
@@ -28,7 +31,7 @@ build:
     - docker
   image: docker
   script:
-    - docker build -t tags:$CI_PIPELINE_IID .
+    - docker build -t $DOCKER_USERNAME/tags:$CI_PIPELINE_IID .
   only: 
     - master
 
@@ -39,7 +42,7 @@ push:
     - docker
   script:
     - docker login -u $DOCKER_USER -p $DOCKER_PASS
-    - docker push tags:$CI_PIPELINE_IID
+    - docker push $DOCKER_USERNAME/tags:$CI_PIPELINE_IID
   only:
     - master
 
@@ -52,6 +55,6 @@ cleanup:
   only:
     - master
   script:
-    - docker rmi tsgs:$CI_PIPELINE_IID --force
+    - docker rmi $DOCKER_USERNAME/tags:$CI_PIPELINE_IID --force
     - docker image prune -f
 
