@@ -3,6 +3,7 @@ stages:
   - test
   - build
   - push
+  - cleanup
 
 before_script:
   - mkdir -p $GOPATH/src/github.com/meinto /builds/meinto/tags
@@ -39,5 +40,18 @@ push:
   script:
     - docker login -u $DOCKER_USER -p $DOCKER_PASS
     - docker push tags:$CI_PIPELINE_IID
-    - docker rmi tags:$CI_PIPELINE_IID --force
+  only:
+    - master
+
+cleanup:
+  stage: cleanup
+  when: always
+  image: docker
+  tags:
+    - docker
+  only:
+    - master
+  script:
+    - docker rmi tsgs:$CI_PIPELINE_IID --force
+    - docker image prune -f
 
