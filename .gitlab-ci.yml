@@ -1,0 +1,12 @@
+
+stages:
+  - test
+
+test:
+  stage: test
+  tags:
+    - docker
+  image: golang:1.11
+  script: 
+    - ls && pwd
+    - go test ./...
