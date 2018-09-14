@@ -2,6 +2,7 @@
 stages:
   - test
   - build
+  - push
 
 before_script:
   - mkdir -p $GOPATH/src/github.com/meinto /builds/meinto/tags
@@ -29,4 +30,13 @@ build:
     - docker build -t tags:$CI_PIPELINE_IID .
   only: 
     - master
+
+push:
+  stage: push
+  tags:
+    - docker
+  script:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS
+    - docker push tags:$CI_PIPELINE_IID
+    - docker rmi tags:$CI_PIPELINE_IID --force
 
