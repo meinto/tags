@@ -3,9 +3,10 @@ stages:
   - test
 
 before_script:
-  - mkdir -p /go/src/github.com/meinto /builds/meinto/tags
-  - cp -r $CI_PROJECT_DIR /go/src/github.com/meinto
-  - ln -s /go/src/github.com/meinto /builds/meinto/tags
+  - mkdir -p $GOPATH/src/github.com/meinto /builds/meinto/tags
+  - cp -r $CI_PROJECT_DIR $GOPATH/src/github.com/meinto
+  - ln -s $GOPATH/src/github.com/meinto /builds/meinto/tags
+  - cd $GOPATH/src/github.com/meinto
 
 test:
   stage: test
